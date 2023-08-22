@@ -1,0 +1,9 @@
+.container {
+	width: 60%;
+	margin: auto;
+}
+
+.header {
+	text-align: center;
+	color: darkblue;
+}
