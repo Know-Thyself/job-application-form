@@ -63,7 +63,7 @@
 						type="radio"
 						id="employed"
 						name="occupation"
-                        value="employed"
+						value="employed"
 						required
 					/>
 					<label
@@ -77,7 +77,7 @@
 						type="radio"
 						id="unemployed"
 						name="occupation"
-                        value="unemployed"
+						value="unemployed"
 						required
 					/>
 					<label
@@ -91,7 +91,7 @@
 						type="radio"
 						id="sef_employed"
 						name="occupation"
-                        value="sef_employed"
+						value="sef_employed"
 						required
 					/>
 					<label
@@ -105,7 +105,7 @@
 						type="radio"
 						id="student"
 						name="occupation"
-                        value="student"
+						value="student"
 						required
 					/>
 					<label
@@ -117,6 +117,13 @@
 				</div>
 				<br />
 				<input class="btn btn-primary mb-4" type="submit" value="Submit Form" />
+				{% with messages = get_flashed_messages() %} {% if messages %}
+				<div>
+					{% for message in messages %}
+					<p class="alert alert-success">{{message}}</p>
+					{% endfor %}
+				</div>
+				{% endif %} {% endwith %}
 			</form>
 		</section>
 	</body>

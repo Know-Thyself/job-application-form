@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from dotenv import load_dotenv
 from datetime import datetime
 import os
@@ -17,17 +17,13 @@ def create_app():
     @app.route("/", methods=["GET", "POST"])
     def home():
         if request.method == "POST":
-            date_obj = datetime.strptime(request.form["date"], "%Y-%m-%d")
-            # Inserting data to the form table
-            form = Form(
-                first_name=request.form["first_name"],
-                last_name=request.form["last_name"],
-                email=request.form["email"],
-                date=date_obj,
-                occupation=request.form["occupation"],
-            )
+            applicant = dict(request.form)
+            date = {"date": datetime.strptime(request.form["date"], "%Y-%m-%d")}
+            form_data = {**applicant, **date}
+            form = Form(**form_data)
             db.session.add(form)
             db.session.commit()
+            flash(f"Hey {form_data['first_name']}, your application is submitted successfully!", "success")
         return render_template("index.html")
 
     with app.app_context():
